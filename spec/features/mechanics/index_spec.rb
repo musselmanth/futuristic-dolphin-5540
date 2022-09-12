@@ -25,19 +25,19 @@ RSpec.describe 'Mechanics Index', type: :feature do
   it 'lists each mechanic name and years of experience' do
     within("div#mechanic-#{@tim.id}") {
       expect(page).to have_content(@tim.name)
-      expect(page).to have_content("Years of Experience: 1")
+      expect(page).to have_content("Years of Experience: #{@tim.years_experience}")
     }
     within("div#mechanic-#{@betty.id}") {
       expect(page).to have_content(@betty.name)
-      expect(page).to have_content("Years of Experience: 17")
+      expect(page).to have_content("Years of Experience: #{@betty.years_experience}")
     }
     within("div#mechanic-#{@woody.id}") {
       expect(page).to have_content(@woody.name)
-      expect(page).to have_content("Years of Experience: 5")
+      expect(page).to have_content("Years of Experience: #{@woody.years_experience}")
     }
   end
 
-  it 'lists the average experience for all mechanics' do
-    expect(page).to have_content("Average Mechanic Experience: #{Mechanic.average_experience}")
+  it 'lists the average experience for all mechanics rounded' do
+    expect(page).to have_content("Average Mechanic Experience: #{Mechanic.average_experience.round(2)}")
   end
 end
