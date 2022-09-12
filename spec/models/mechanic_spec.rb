@@ -12,7 +12,7 @@ RSpec.describe Mechanic, type: :model do
       
     @hurler = @six_flags.rides.create!(name: 'The Hurler', thrill_rating: 7, open: true)
     @scrambler = @six_flags.rides.create!(name: 'The Scrambler', thrill_rating: 4, open: true)
-    @ferris = @six_flags.rides.create!(name: 'Ferris Wheel', thrill_rating: 7, open: false) 
+    @ferris = @six_flags.rides.create!(name: 'Ferris Wheel', thrill_rating: 2, open: false) 
       
     @jaws = @universal.rides.create!(name: 'Jaws', thrill_rating: 5, open: true)  
       
@@ -22,6 +22,9 @@ RSpec.describe Mechanic, type: :model do
 
     @jaws.mechanics << [@tim, @betty]
     @ferris.mechanics << @woody
+    @hurler.mechanics << [@woody, @tim]
+    @scrambler.mechanics << [@betty, @woody]
+
   end
 
   describe 'class methods' do
@@ -33,6 +36,16 @@ RSpec.describe Mechanic, type: :model do
       it 'returns the average experience for a subset of mechanics' do
         expect(@jaws.mechanics.average_experience).to eq(9)
         expect(@ferris.mechanics.average_experience).to eq(5)
+      end
+    end
+  end
+
+  describe 'instance methods' do
+    describe '.open_rides_ordered_by_thrill' do
+      it 'returns all open rides for the mechanic ordered by thrill level' do
+        expect(@woody.open_rides_ordered_by_thrill).to eq([@hurler, @scrambler])
+        expect(@betty.open_rides_ordered_by_thrill).to eq([@jaws, @scrambler])
+        expect(@tim.open_rides_ordered_by_thrill).to eq([@hurler, @jaws])
       end
     end
   end
