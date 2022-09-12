@@ -34,5 +34,24 @@ RSpec.describe 'Mechanics Show Page', type: :feature do
     expect(@hurler.name).to appear_before(@jaws.name)
     expect(@jaws.name).to appear_before(@scrambler.name)
   end
+
+  describe 'add ride to mechanic' do
+    it 'has a form to add a new ride' do
+      expect(page).to have_content("Add a ride to workload:")
+      expect(page).to have_field(:ride_id)
+      expect(page).to have_button("Submit")
+    end
+
+    it 'adds a ride to the show page when the form is submitted' do
+      new_ride = @six_flags.rides.create!(name: "Teacups", thrill_rating: 1, open: true)
+      fill_in(:ride_id, with: new_ride.id)
+      click_button("Submit")
+
+      expect(current_path).to eq("/mechanics/#{@mechanic.id}")
+      within("div#ride-#{new_ride.id}") do
+        expect(page).to have_content(new_ride.name)
+      end
+    end
+  end
   
 end
