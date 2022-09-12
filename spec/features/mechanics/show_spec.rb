@@ -17,10 +17,13 @@ RSpec.describe 'Mechanics Show Page', type: :feature do
 
   it 'lists the mechanics name and years of experience' do
     expect(page).to have_content(@mechanic.name)
-    expect(page).to have_content(@mechanic.years_experience)
+    expect(page).to have_content("Years of Experience: #{@mechanic.years_experience}")
   end
 
+  
+
   it 'lists only the mecahnics open rides' do
+    expect(page).to have_content("Currently Working on Open Rides:")
     expect(page).to have_content(@scrambler.name)
     expect(page).to have_content(@hurler.name)
     expect(page).to have_content(@jaws.name)
