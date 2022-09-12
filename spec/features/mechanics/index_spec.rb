@@ -1,4 +1,4 @@
-include 'rails_helper'
+require 'rails_helper'
 
 RSpec.describe 'Mechanics Index', type: :feature do
 
