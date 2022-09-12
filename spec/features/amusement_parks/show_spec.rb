@@ -13,7 +13,7 @@ RSpec.describe 'Amusement Parks Show Page', type: :feature do
 
   it 'has shows the amusement park name and admissions rate' do
     expect(page).to have_content(@six_flags.name)
-    expect(page).to have_content("Admissions: #{number_to_currency(@six_flags.admission_cost)}")
+    expect(page).to have_content("Admissions: $#{@six_flags.admission_cost}.00")
   end
 
   it 'lists the rides for the amusement park' do
