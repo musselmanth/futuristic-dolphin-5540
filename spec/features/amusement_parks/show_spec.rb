@@ -29,6 +29,6 @@ RSpec.describe 'Amusement Parks Show Page', type: :feature do
   end
 
   it 'shows the average thrill rating for the rides' do
-    expect(page).to have_content("Average Thrill Rating of the Rides: #{@six_flags.rides_average_thrill.round(2)}")
+    expect(page).to have_content("Average Thrill Rating of the Rides: #{@six_flags.rides.average_thrill.round(2)}")
   end
 end
